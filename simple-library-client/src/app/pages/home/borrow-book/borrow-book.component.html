@@ -1,0 +1,27 @@
+<div class="grid grid-cols-6 gap-4">
+  <div
+    *ngFor="let item of borrowedBooks()"
+    class="rounded-lg border border-gray-100 p-4 space-y-4 shadow-md"
+  >
+    <div class="space-y-2">
+      <h3 class="text-lg font-semibold">{{ item.book.name }}</h3>
+      <h4>Borrowed at: {{ item.borrowedAt | date : "MM-dd-yyyy" }}</h4>
+      <h4 class="text-red-500">
+        Expired at: {{ item.expiredAt | date : "MM-dd-yyyy" }}
+      </h4>
+      <h4 class="text-blue-500">
+        Returned at: {{ item.returnedAt | date : "MM-dd-yyyy" }}
+      </h4>
+    </div>
+
+    <div class="flex justify-end">
+      <button
+        *ngIf="!item.returnedAt"
+        (click)="returnBook(item)"
+        class="rounded-md px-4 py-2 bg-blue-600 text-white"
+      >
+        Return
+      </button>
+    </div>
+  </div>
+</div>
